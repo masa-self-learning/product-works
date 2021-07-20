@@ -1,0 +1,81 @@
+<% provide(:title, "日報登録") %>
+
+<h1 class="main-title text-white">Web日報登録</h1>
+<%= form_with class: "border rounded bg-white form-time-table" do |f| %>
+  <h2 class="h3 my-3">ログイン</h2>
+  <select class="form-control rounded-pill mb-3" id="exampleFormControlSelect1">
+    <option>2021/7</option>
+  </select>
+  <table class="table table-bordered">
+    <thead>
+      <tr class="bg-light">
+        <th scope="col">日</th>
+        <th scope="col">出勤</th>
+        <th scope="col">退勤</th>
+        <th scope="col">休憩</th>
+        <th scope="col">業務内容</th>
+        <th scope="col"></th>     
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1(水)</th>
+        <td>09:00</td>
+        <td>18:00</td>
+        <td>01:00</td>
+        <td>テストテストテストテストテストテストテスト…</td>
+        <td><i class="fas fa-pen"></i></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p></p>
+        <h5 class="modal-title" id="exampleModalLabel">日報登録</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="alert alert-primary" role="alert">
+            11/1(水)
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="出勤">
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="退勤">
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="休憩">
+              </div>
+            </div>
+          </div>
+          <div class="form-group pt-3">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="業務内容"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary rounded-pill px-5">登録</button>
+      </div>
+    </div>
+  </div>
+</div>

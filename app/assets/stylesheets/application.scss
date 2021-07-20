@@ -1,0 +1,114 @@
+@import "bootstrap";
+
+// 共通
+body {
+    color: #707070;
+    height: 100vw;
+
+    .image1 {
+        margin-top: 56px;
+        background-image: image-url("works_home.jpg");
+        height: 760px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .image2 {
+        margin-top: 56px;
+        background-image: image-url("works2.jpg");
+        height: 1500px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+.main-title {
+  font-size: 32px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+// ログイン用フォームｓ
+.form-login {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding-top: 45px;
+    padding-bottom: 20px;
+
+    input {
+        max-width: 300px;
+        margin: auto;
+        height: 50px;
+    }
+}
+
+.btn {
+    height: 50px;
+}
+
+// 月別リスト用フォーム
+.form-time-table {
+    width: 90%;
+    margin: auto;
+    padding: 15px;
+
+    select {
+        max-width: 200px;
+        height: 50px;
+    }
+}
+
+.modal {
+  
+  &-header {
+    .close {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  &-footer {
+    justify-content: center;
+  }
+}
+
+.form-user-list {
+    max-width: 600px;
+    margin: auto;
+    padding: 15px;
+}
+
+// エラーメッセージ
+#error_explanation {
+    color: red;
+
+    ul {
+        margin: 0 0 30px 0;
+        text-align: left;
+    }
+}
+
+.field_with_errors {
+    .form-control {
+        color: red;
+        border: solid 1px red;
+    }
+}
+
+// flashメッセージ
+.alert {
+    margin-top: 16px;
+    text-align: center;
+}
+
+
+
+// デバック表示
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    box-sizing: border-box;
+    border: solid 1px black;
+    background-color: #ffffff;
+}

@@ -1,0 +1,37 @@
+<%# 社員登録 %>
+<% if @user && @user.errors.any?%>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      入力内容に<%= @user.errors.count %>個のエラーがあります。
+    </div>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<%# 勤怠登録(当日データなし) %>
+<% elsif @work && @work.errors.any?%>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      入力内容に<%= @report.errors.count %>個のエラーがあります。
+    </div>
+    <ul>
+      <% @work.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<%# 勤怠登録(当日データあり) %>
+<% elsif @report && @report.errors.any?%>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      入力内容に<%= @report.errors.count %>個のエラーがあります。
+    </div>
+    <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
