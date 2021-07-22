@@ -1,88 +1,45 @@
-<header class="header">
-  <nav class="navbar navbar-expand-lg navbar-light bg-yellow p-none header__height fixed-top">
-    <div class="container-fluid">
-      <%= link_to  root_path, class: "navbar-brand" do %>
-        <div class="logo">
-          <%= image_tag "rakurecipe-logo.png", class: "logo__img" %>
-          <div class="logo__title">楽楽レシピ</div>
-        </div>
-      <% end %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-flex-end-992up" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="ham-menu__item nav-item">
-            <%= link_to root_path, class: "ham-menu__link nav-link" do %>
-              <div class="ham-menu__link-inner">
-                <div class="ham-menu__title">ホーム</div>
-                <span><i class="fas fa-chevron-right"></i></span>
-              </div>
-            <% end %>
-          </li>
-          <li class="ham-menu__item nav-item">
-            <%= link_to recipes_path, class: "ham-menu__link nav-link" do %>
-              <div class="ham-menu__link-inner">
-                <div class="ham-menu__title">レシピ一覧</div>
-                <span><i class="fas fa-chevron-right"></i></span>
-              </div>
-            <% end %>
-          </li>
-          <li class="ham-menu__item nav-item">
-            <%= link_to users_path, class: "ham-menu__link nav-link" do %>
-              <div class="ham-menu__link-inner">
-                <div class="ham-menu__title">ユーザー一覧</div>
-                <span><i class="fas fa-chevron-right"></i></span>
-              </div>
-            <% end %>
-          </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-          <% if user_signed_in? %>
-            <li class="ham-menu__item nav-item">
-              <%= link_to user_path(current_user), class: "ham-menu__link nav-link" do %>
-                <div class="ham-menu__link-inner">
-                  <div class="ham-menu__title">マイページ</div>
-                  <span><i class="fas fa-chevron-right"></i></span>
-                </div>
-              <% end %>
-            </li>
-            <li class="ham-menu__item nav-item">
-              <%= link_to new_recipe_path, class: "ham-menu__link nav-link" do %>
-                <div class="ham-menu__link-inner">
-                  <div class="ham-menu__title">レシピ投稿</div>
-                  <span><i class="fas fa-chevron-right"></i></span>
-                </div>
-              <% end %>
-            </li>
-            <li class="ham-menu__item nav-item">
-              <%= link_to destroy_user_session_path, method: :delete, class: "ham-menu__link nav-link" do %>
-                <div class="ham-menu__link-inner">
-                  <div class="ham-menu__title">ログアウト</div>
-                  <span><i class="fas fa-chevron-right"></i></span>
-                </div>
-              <% end %>
-            </li>
-          <% else %>
-            <li class="ham-menu__item nav-item">
-              <%= link_to new_user_registration_path, class: "ham-menu__link nav-link" do %>
-                <div class="ham-menu__link-inner">
-                  <div class="ham-menu__title">新規登録</div>
-                  <span><i class="fas fa-chevron-right"></i></span>
-                </div>
-              <% end %>
-            </li>
-            <li class="ham-menu__item nav-item">
-              <%= link_to new_user_session_path, class: "ham-menu__link nav-link" do %>
-                <div class="ham-menu__link-inner">
-                  <div class="ham-menu__title">ログイン</div>
-                  <span><i class="fas fa-chevron-right"></i></span>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to destroy_admin_session_path, method: :delete, class: "ham-menu__link nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">adminログアウト</div>
+            <span><i class="fas fa-chevron-right"></i></span>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to destroy_user_session_path, method: :delete, class: "ham-menu__link nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">ログアウト</div>
+            <span><i class="fas fa-chevron-right"></i></span>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

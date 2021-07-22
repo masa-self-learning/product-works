@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: "admins/registrations",
     sessions: "admins/sessions"
   }
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
   root to: "home#index"
   resources :users

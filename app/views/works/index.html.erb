@@ -2,9 +2,12 @@
 
 <h1 class="main-title">Web日報登録</h1>
 <%= form_with class: "border rounded bg-white form-time-table" do |f| %>
-  <h2 class="h3 my-3">ログイン</h2>
+  <h2 class="h3 my-3">月間データ</h2>
   <select class="form-control rounded-pill mb-3" id="exampleFormControlSelect1">
-    <option>2021/7</option>
+    <option><%= @today.strftime('%Y/%m') %></option>
+    <% for i in 1..12 %>
+      <option><%= @today.ago(i.month).strftime('%Y/%m') %><option>
+    <% end %>
   </select>
   <table class="table table-bordered">
     <thead>
@@ -14,18 +17,35 @@
         <th scope="col">退勤</th>
         <th scope="col">休憩</th>
         <th scope="col">業務内容</th>
-        <th scope="col"></th>     
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1(水)</th>
-        <td>09:00</td>
-        <td>18:00</td>
-        <td>01:00</td>
-        <td>テストテストテストテストテストテストテスト…</td>
-        <td><i class="fas fa-pen"></i></td>
-      </tr>
+      <% @one_month_size.times do |n| %>
+        <% date = "#{@month}-#{format("%02d", n + 1)}".to_date %>
+        <% start_time = "" %>
+        <% end_time = "" %> 
+        <% break_time = "" %>
+        <% comment = "" %>
+ 
+          <% @works.each do |work| %>
+            <% if work.date == date %>
+              <% date = work.date %>
+              <% start_time = work.start_time.strftime('%H:%M') if work.start_time != nil %>
+              <% end_time = work.end_time.strftime('%H:%M') if work.end_time != nil %> 
+              <% break_time = work.break_time.strftime('%H:%M') if work.break_time != nil %>
+              <% comment = work.comment.truncate(20) if work.comment != nil %>              
+            <% end %>
+          <% end %>
+         <tr>
+          <th scope="row"><%= date.strftime('%-m/%-d') %>(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
+          <td><%= start_time %></td>
+          <td><%= end_time %></td>
+          <td><%= break_time %></td>
+          <td><%= comment %></td>
+          <td><i class="fas fa-pen"></i></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 <% end %>
