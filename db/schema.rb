@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_21_081122) do
+ActiveRecord::Schema.define(version: 2021_07_24_024524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_081122) do
     t.date "date"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "break_time"
+    t.string "break_time"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
