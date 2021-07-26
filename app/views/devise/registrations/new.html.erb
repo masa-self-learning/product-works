@@ -6,15 +6,15 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.text_field :name, class: "form-control rounded-pill mb-3 pt-3", autocomplete: "name", placeholder: "名前" %>
+    <%= f.text_field :name, class: "form-control rounded-pill mb-3 pt-3", autofocus: true, autocomplete: "email", placeholder: "名前" %>
   </div>
 
   <div class="field">
-    <%= f.text_field :user_no, class: "form-control rounded-pill mb-3", autofocus: true, autocomplete: "user_no", placeholder: "社員番号 (数字4文字)" %>
+    <%= f.text_field :user_no, class: "form-control rounded-pill mb-3", autofocus: true, autocomplete: "email", placeholder: "社員番号 (数字4文字)" %>
   </div>
 
   <div class="field">
-    <%= f.email_field :email, class: "form-control rounded-pill mb-3", autocomplete: "email", placeholder: "メールアドレス" %>
+    <%= f.email_field :email, class: "form-control rounded-pill mb-3", autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
   </div>
 
   <div class="field">

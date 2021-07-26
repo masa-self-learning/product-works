@@ -1,14 +1,16 @@
 <% provide(:title, "日報登録") %>
 
-<h1 class="main-title">Web日報登録</h1>
-<form class= "border rounded bg-white form-time-table">
+<h1 class="main-title">Web日報登録<%= @day %></h1>
+<div class= "border rounded bg-white form-time-table">
   <h2 class="h3 my-3">月間データ</h2>
-  <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
-    <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
-    <% for i in 1..12 %>
-      <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>><%= @today.ago(i.month).strftime('%Y/%m') %></option>
-    <% end %>
-  </select>
+  <form>
+    <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
+      <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
+      <% for i in 1..12 %>
+        <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>><%= @today.ago(i.month).strftime('%Y/%m') %></option>
+      <% end %>
+    </select>
+  </form>
   <table class="table table-bordered">
     <thead>
       <tr class="bg-light">
@@ -17,7 +19,8 @@
         <th scope="col">退勤</th>
         <th scope="col">休憩</th>
         <th scope="col">業務内容</th>
-        <th scope="col"></th>
+        <th scope="col">詳細</th>
+        <th scope="col">編集</th>
       </tr>
     </thead>
     <tbody>
@@ -43,15 +46,23 @@
           <td><%= end_time %></td>
           <td><%= break_time %></td>
           <td><%= comment %></td>
-          <td><button type="button" class="btn h-auto py-0" data-toggle="modal" data-target="#inputModal" data-day="<%= date.strftime('%Y-%m-%d') %>"><i class="fas fa-pen"></i></button></td>
+          <td>
+            <button type="button" class="btn h-auto py-0" data-toggle="modal" data-target="#inputModal-edit" data-day="<%= date.strftime('%Y-%m-%d') %>">
+              <i class="fas fa-book-open"></i>
+            </button>
+          </td>
+          <td>
+            <%= link_to edit_work_path(date) do %>
+              <i class="fas fa-pen"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-</form>
+</div>
 
-
-<!-- Modal -->
+<!-- Modal 当日勤怠入力用 -->
 <%= form_with model: @work, local: true do |f| %>
 <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -66,7 +77,7 @@
       <div class="modal-body">
         <div class="container">
           <div class="alert alert-primary" role="alert">
-            <%= @today.strftime('%Y年%m月%d日') %>(<%= %w(日 月 火 水 木 金 土)[@today.wday] %>)
+            <span id="modal_day"><%= @today.strftime('%Y年%m月%d日') %>(<%= %w(日 月 火 水 木 金 土)[@today.wday] %>)</span>
             <%= f.hidden_field :date, value: @today %>
           </div>
           <div class="row">
@@ -105,7 +116,60 @@
 </div>
 <% end %>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- Modal　詳細表示及び編集画面遷移用 -->
+<%= form_with model: @work, local: true do |f| %>
+<div class="modal fade" id="inputModal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p></p>
+        <h5 class="modal-title" id="exampleModalLabel">日報詳細</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="alert alert-primary" role="alert">
+            <span id="modal_day-edit"></span>
+            <%= f.hidden_field :date, value: @today %>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div class="input-group">
+                <%= f.text_field :start_time, id: "modal_start_time-edit", class: "form-control", value: @modal_start_time, readonly: "true" %>
+                <div class="input-group-prepend">
+                  <button type="button" class="input-group-text">打刻</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="input-group">
+                <%= f.text_field :end_time, id: "modal_end_time-edit", class: "form-control", value: @modal_end_time, readonly: "true" %>
+                <div class="input-group-prepend">
+                  <button type="button" class="input-group-text">打刻</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="input-group">
+                <%= f.text_field :break_time, id: "modal_break_time-edit", class: "form-control rounded", value: @modal_break_time, readonly: "true" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group pt-3">
+            <%= f.text_area :comment, id: "modal_comment-edit", class: "form-control", size: "40x5", value: @modal_comment, maxlength: 200, readonly: "true" %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>  
 
 <script>
@@ -132,22 +196,29 @@
   });
 
   // 編集モーダル表示
-  $('#inputModal').on('show.bs.modal', function(event) {
-    const button = $(event.relatedTarget)
-    const target_day = button.data('day')
+  $('#inputModal-edit').on('show.bs.modal', function(event) {
+    const button = $(event.relatedTarget);
+    const target_day = button.data('day');
+    const target_year = target_day.substr(0, 4)
 
     // 編集ボタンが押された対象日の表データを取得
-    const day = button.closest('tr').children('th')[0].innerText
-    const start_time = button.closest('tr').children('td')[0].innerText
-    const end_time = button.closest('tr').children('td')[1].innerText
-    const break_time = button.closest('tr').children('td')[2].innerText
-    const comment = button.closest('tr').children('td')[3].innerText
+    const day = button.closest('tr').children('th')[0].innerText;
+    const start_time = button.closest('tr').children('td')[0].innerText;
+    const end_time = button.closest('tr').children('td')[1].innerText;
+    const break_time = button.closest('tr').children('td')[2].innerText;
+    const comment = button.closest('tr').children('td')[3].innerText;
 
     // 取得したデータをモーダルの各種に設定
-    $('#modal_day').val(day)
-    $('#modal_start_time').val(start_time)
-    $('#modal_end_time').val(end_time)
-    $('#modal_break_time').val(break_time)
-    $('#modal_comment').val(comment)
+    $('#modal_day-edit').text(target_year+ "/" + day);
+    $('#modal_start_time-edit').val(start_time);
+    $('#modal_end_time-edit').val(end_time);
+    $('#modal_break_time-edit').val(break_time);
+    $('#modal_comment-edit').val(comment);
+    console.log(target_year);
   })
+  // console.log(url)
+  //   var url = new URL(window.location.href)
+  //   url.searchParams.append('day', '2021-07-01')
+  //   location.href = url
+  // console.log(url)
 </script>

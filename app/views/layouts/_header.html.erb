@@ -6,40 +6,68 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to destroy_admin_session_path, method: :delete, class: "ham-menu__link nav-link" do %>
+      <li class="nav-item">
+        <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
           <div class="ham-menu__link-inner">
             <div class="ham-menu__title">adminログアウト</div>
-            <span><i class="fas fa-chevron-right"></i></span>
           </div>
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to destroy_user_session_path, method: :delete, class: "ham-menu__link nav-link" do %>
+        <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
           <div class="ham-menu__link-inner">
             <div class="ham-menu__title">ログアウト</div>
-            <span><i class="fas fa-chevron-right"></i></span>
           </div>
         <% end %>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item">
+        <%= link_to admin_session_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">管理者ログイン</div>
+          </div>
+        <% end %>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <%= link_to user_session_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">ログイン</div>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to works_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">日報一覧</div>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to users_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">社員一覧</div>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to root_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">ホーム</div>
+          </div>
+        <% end %>
+      <li class="nav-item">
+        <%= link_to new_user_registration_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">新規登録</div>
+          </div>
+        <% end %>
+      <li class="nav-item">
+        <%= link_to new_admin_registration_path, class: "nav-link" do %>
+          <div class="ham-menu__link-inner">
+            <div class="ham-menu__title">管理者新規登録</div>
+          </div>
+        <% end %>
+      </li>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>

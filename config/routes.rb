@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'admin_works/index'
   devise_for :admins, controllers: {
     registrations: "admins/registrations",
     sessions: "admins/sessions"
