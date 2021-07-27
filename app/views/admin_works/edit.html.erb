@@ -1,14 +1,14 @@
 <% provide(:title, "日報編集") %>
 
-<h1 class="main-title">Web日報登録</h1>
+<h1 class="main-title text-white">Web日報登録</h1>
 
 <!-- Modal 当日勤怠入力用 -->
-<%= form_with model: @work, local: true do |f| %>
+<%= form_with model: [ :admin, @work ], local: true do |f| %>
 <section>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <p style="width: 50px;"></p>
+        <p></p>
         <h5 class="modal-title">日報編集（<%= @user.name %>）</h5>
         <%= link_to :back do %>
           <button class="btn btn-secondary btn-back">戻る</button>
@@ -19,6 +19,7 @@
           <div class="alert alert-primary">
             <%= @date.strftime('%Y年%m月%d日') %>(<%= %w(日 月 火 水 木 金 土)[@date.wday] %>)
             <%= f.hidden_field :date, value: @date %>
+            <%= f.hidden_field :user_id, value: @user.id %>
           </div>
           <div class="row">
             <div class="col-sm">

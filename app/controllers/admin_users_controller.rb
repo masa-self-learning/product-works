@@ -1,10 +1,8 @@
-class UsersController < ApplicationController
+class AdminUsersController < ApplicationController
   before_action :authenticate_admin!
-  def index
-    @users = User.all
-    render :layout => 'admin_application'
-  end
 
-  def edit
+  def index
+    @users = Admin.all
+    render :layout => 'admin_application'
   end
 end

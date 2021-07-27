@@ -1,13 +1,15 @@
 <% provide(:title, "日報登録") %>
 
-<h1 class="main-title">Web日報登録<%= @day %></h1>
+<h1 class="main-title">Web日報登録</h1>
 <div class= "border rounded bg-white form-time-table">
-  <h2 class="h3 my-3">月間データ</h2>
+  <h2 class="h3 my-3">月間データ（<%= @user.name %>）</h2>
   <form>
     <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
       <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
       <% for i in 1..12 %>
-        <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>><%= @today.ago(i.month).strftime('%Y/%m') %></option>
+        <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>>
+          <%= @today.ago(i.month).strftime('%Y/%m') %>
+        </option>
       <% end %>
     </select>
   </form>
@@ -118,7 +120,7 @@
 
 <!-- Modal　詳細表示及び編集画面遷移用 -->
 <%= form_with model: @work, local: true do |f| %>
-<div class="modal fade" id="inputModal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="inputModal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -173,7 +175,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>  
 
 <script>
-
 // モーダル表示
   if (<%= @modal_view_flg %>) {
     const inputModal = new bootstrap.Modal(document.getElementById('inputModal'));
@@ -216,9 +217,4 @@
     $('#modal_comment-edit').val(comment);
     console.log(target_year);
   })
-  // console.log(url)
-  //   var url = new URL(window.location.href)
-  //   url.searchParams.append('day', '2021-07-01')
-  //   location.href = url
-  // console.log(url)
 </script>

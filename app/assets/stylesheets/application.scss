@@ -100,15 +100,8 @@ body {
     text-align: center;
 }
 
-
-
-// デバック表示
-.debug_dump {
-    clear: both;
-    float: left;
-    width: 100%;
-    margin-top: 45px;
-    box-sizing: border-box;
-    border: solid 1px black;
-    background-color: #ffffff;
+// 戻るボタン
+.btn-back {
+    height: 30px;
+    font-size: 12px;
 }

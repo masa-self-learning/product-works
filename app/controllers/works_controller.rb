@@ -1,10 +1,14 @@
 class WorksController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_admin! unless :authenticate_user!
+  before_action :authenticate_user! unless :authenticate_admin!
+
   def index
+    
+    # 社員のみ利用する為、current_user。他社員へのアクセス権限なし。
+    @user = User.find(current_user.id)
+    @works = @user.works.order(date: 'ASC')
 
-    user = User.find(current_user.id)
-    @works = user.works.order(date: 'ASC')
-
+    # 当日の日付
     @today = Date.today
 
     #当月か選択月を変数に代入
@@ -43,17 +47,14 @@ class WorksController < ApplicationController
   end
 
   def create
-
     @work = Work.new(work_params)
     date = @work.date.strftime('%Y-%m')
-    
-    # これ何？
     @work.user_id = current_user.id
 
     if @work.save
       redirect_to works_path(date: date), notice: '登録に成功しました'
     else
-      render :index
+      redirect_to works_path(date: date), notice: '登録に失敗しました'
     end
   end
 
@@ -84,10 +85,9 @@ class WorksController < ApplicationController
     if @work.update(work_params)
       redirect_to works_path(date: date), notice: '更新に成功しました'
     else
-      render :index
+      redirect_to works_path(date: date), notice: '更新に失敗しました'
     end
   end
-
 
   private
     def work_params

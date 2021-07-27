@@ -1,11 +1,19 @@
 <% provide(:title, "日報登録") %>
 
 <h1 class="main-title text-white">Web日報登録</h1>
-<%= form_with class: "border rounded bg-white form-time-table" do |f| %>
-  <h2 class="h3 my-3">ログイン</h2>
-  <select class="form-control rounded-pill mb-3" id="exampleFormControlSelect1">
-    <option>2021/7</option>
-  </select>
+<div class= "border rounded bg-white form-time-table">
+  <h2 class="h3 my-3">月間データ（<%= @user.name %>）</h2>
+  <form>
+    <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
+      <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
+      <% for i in 1..12 %>
+        <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>>
+          <%= @today.ago(i.month).strftime('%Y/%m') %>
+        </option>
+      <% end %>
+    </select>
+    <input type='hidden' value='<%= @user.id %>' name="id">
+  </form>
   <table class="table table-bordered">
     <thead>
       <tr class="bg-light">
@@ -14,34 +22,57 @@
         <th scope="col">退勤</th>
         <th scope="col">休憩</th>
         <th scope="col">業務内容</th>
-        <th scope="col"></th>     
+        <th scope="col">詳細</th>
+        <th scope="col">編集</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1(水)</th>
-        <td>09:00</td>
-        <td>18:00</td>
-        <td>01:00</td>
-        <td>テストテストテストテストテストテストテスト…</td>
-        <td><i class="fas fa-pen"></i></td>
-      </tr>
+      <% @days.times do |n| %>
+        <% date = "#{@yyyymm}-#{format("%02d", n + 1)}".to_date %>
+        <% start_time = "" %>
+        <% end_time = "" %> 
+        <% break_time = "" %>
+        <% comment = "" %>
+ 
+          <% @works.each do |work| %>
+            <% if work.date == date %>
+              <% date = work.date %>
+              <% start_time = work.start_time.strftime('%H:%M') if work.start_time != nil %>
+              <% end_time = work.end_time.strftime('%H:%M') if work.end_time != nil %> 
+              <% break_time = work.break_time if work.break_time != nil %>
+              <% comment = work.comment.truncate(20) if work.comment != nil %>              
+            <% end %>
+          <% end %>
+         <tr>
+          <th scope="row"><%= date.strftime('%-m/%-d') %>(<%= %w(日 月 火 水 木 金 土)[date.wday] %>)</th>
+          <td><%= start_time %></td>
+          <td><%= end_time %></td>
+          <td><%= break_time %></td>
+          <td><%= comment %></td>
+          <td>
+            <button type="button" class="btn h-auto py-0" data-toggle="modal" data-target="#inputModal-edit" data-day="<%= date.strftime('%Y-%m-%d') %>">
+              <i class="fas fa-book-open"></i>
+            </button>
+          </td>
+          <td>
+            <%= link_to edit_admin_work_path(id: date, user_id: @user.id) do %>
+              <i class="fas fa-pen"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
-<% end %>
+</div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal　詳細表示及び編集画面遷移用 -->
+<%= form_with model: @work, local: true do |f| %>
+<div class="modal fade" id="inputModal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <p></p>
-        <h5 class="modal-title" id="exampleModalLabel">日報登録</h5>
+        <h5 class="modal-title" id="exampleModalLabel">日報詳細</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -49,33 +80,82 @@
       <div class="modal-body">
         <div class="container">
           <div class="alert alert-primary" role="alert">
-            11/1(水)
+            <span id="modal_day-edit"></span>
           </div>
           <div class="row">
             <div class="col-sm">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="出勤">
+                <%= f.text_field :start_time, id: "modal_start_time-edit", class: "form-control", value: @modal_start_time, readonly: "true" %>
+                <div class="input-group-prepend">
+                  <button type="button" class="input-group-text">打刻</button>
+                </div>
               </div>
             </div>
             <div class="col-sm">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="退勤">
+                <%= f.text_field :end_time, id: "modal_end_time-edit", class: "form-control", value: @modal_end_time, readonly: "true" %>
+                <div class="input-group-prepend">
+                  <button type="button" class="input-group-text">打刻</button>
+                </div>
               </div>
             </div>
             <div class="col-sm">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="休憩">
+                <%= f.text_field :break_time, id: "modal_break_time-edit", class: "form-control rounded", value: @modal_break_time, readonly: "true" %>
               </div>
             </div>
           </div>
           <div class="form-group pt-3">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="業務内容"></textarea>
+            <%= f.text_area :comment, id: "modal_comment-edit", class: "form-control", size: "40x5", value: @modal_comment, maxlength: 200, readonly: "true" %>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary rounded-pill px-5">登録</button>
       </div>
     </div>
   </div>
 </div>
+<% end %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>  
+
+<script>
+
+  // 出勤打刻
+  $('#start_btn').click(function () {
+    const now = new Date();
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    $('#modal_start_time').val(hour+':'+minute);   
+  });
+  // 退勤打刻
+  $('#end_btn').click(function () {
+    const now = new Date();
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    $('#modal_end_time').val(hour+':'+minute);   
+  });
+
+  // 編集モーダル表示
+  $('#inputModal-edit').on('show.bs.modal', function(event) {
+    const button = $(event.relatedTarget);
+    const target_day = button.data('day');
+    const target_year = target_day.substr(0, 4)
+
+    // 編集ボタンが押された対象日の表データを取得
+    const day = button.closest('tr').children('th')[0].innerText;
+    const start_time = button.closest('tr').children('td')[0].innerText;
+    const end_time = button.closest('tr').children('td')[1].innerText;
+    const break_time = button.closest('tr').children('td')[2].innerText;
+    const comment = button.closest('tr').children('td')[3].innerText;
+
+    // 取得したデータをモーダルの各種に設定
+    $('#modal_day-edit').text(target_year+ "/" + day);
+    $('#modal_start_time-edit').val(start_time);
+    $('#modal_end_time-edit').val(end_time);
+    $('#modal_break_time-edit').val(break_time);
+    $('#modal_comment-edit').val(comment);
+    console.log(target_year);
+  })
+</script>

@@ -1,8 +1,8 @@
-<% provide(:title, "社員一覧") %>
+<% provide(:title, "管理者一覧") %>
 
 <h1 class="main-title text-white">Web日報登録</h1>
 <div class="border rounded bg-white form-user-list">
-  <h2 class="h3 my-3">社員一覧</h2>
+  <h2 class="h3 my-3">管理者一覧</h2>
   <table class="table table-bordered">
     <thead>
       <tr class="bg-light">
@@ -15,11 +15,7 @@
       <% @users.each do |user| %>
         <tr>
           <th scope="row"><%= user.user_no %></th>
-          <td>
-            <%= link_to admin_works_path(id: user.id) do %>
-              <%= user.name %>
-            <% end %>
-          </td>
+          <td><%= user.name %></td>
           <td><%= user.email %></td>
         </tr>
       <% end %>
