@@ -1,6 +1,5 @@
 class WorksController < ApplicationController
-  before_action :authenticate_admin! unless :authenticate_user!
-  before_action :authenticate_user! unless :authenticate_admin!
+  before_action :authenticate_user!
 
   def index
     
