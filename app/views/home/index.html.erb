@@ -1,1 +1,114 @@
-ホーム
+<div class="container">
+  <div class="home-default-outer mt-30 mb-15 bg-success border rounded">
+    <div class="home-subtitle">デフォルト</div>
+    <div class="home-default row row-cols-md-4 g-4 mb-15">
+      <div class="col">
+        <%= link_to root_path do %>
+          <button type="button" class="btn btn-primary  font-md">ログイン(社員)</button>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to root_path do %>
+          <button type="button" class="btn btn-primary font-md">ログイン(管理者)</button>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to root_path do %>
+          <button type="button" class="btn btn-primary font-md">新規登録(社員)</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <section class="home-user-outer mb-15 bg-secondary border rounded">
+    <div class="home-subtitle text-white">機能一覧(社員)</div>
+    <div class="home-user row row-cols-2 row-cols-md-4 g-4">
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-admin-outer bg-info border rounded">
+    <div class="home-subtitle text-white">機能一覧(管理者)</div>
+    <div class="home-admin row row-cols-2 row-cols-md-4 g-4">
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-15">
+        <div class="card">
+          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+          <div class="card-body">
+            <%= link_to root_path do %>
+              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
