@@ -1,6 +1,6 @@
 <% provide(:title, "日報編集") %>
 
-<h1 class="main-title text-white">Web日報登録</h1>
+<h1 class="main-title text-white">Web日報登録（<%= current_admin.name %>）</h1>
 
 <!-- Modal 当日勤怠入力用 -->
 <%= form_with model: [ :admin, @work ], local: true do |f| %>

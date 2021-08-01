@@ -1,114 +1,120 @@
 <div class="container">
-  <div class="home-default-outer mt-30 mb-15 bg-success border rounded">
-    <div class="home-subtitle">デフォルト</div>
-    <div class="home-default row row-cols-md-4 g-4 mb-15">
-      <div class="col">
-        <%= link_to root_path do %>
-          <button type="button" class="btn btn-primary  font-md">ログイン(社員)</button>
-        <% end %>
-      </div>
-      <div class="col">
-        <%= link_to root_path do %>
-          <button type="button" class="btn btn-primary font-md">ログイン(管理者)</button>
-        <% end %>
-      </div>
-      <div class="col">
-        <%= link_to root_path do %>
-          <button type="button" class="btn btn-primary font-md">新規登録(社員)</button>
-        <% end %>
+  <% if !admin_signed_in? && !user_signed_in? %>
+    <div class="home-default-outer mt-30 bg-white border rounded">
+      <div class="home-subtitle">共通</div>
+      <div class="home-default row row-cols-md-4 g-4 mb-15">
+        <div class="col">
+          <%= link_to user_session_path do %>
+            <button type="button" class="btn btn-primary  font-md">ログイン(社員)</button>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= link_to admin_session_path do %>
+            <button type="button" class="btn btn-primary font-md">ログイン(管理者)</button>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= link_to new_user_registration_path do %>
+            <button type="button" class="btn btn-primary font-md">新規登録(社員)</button>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
-  <section class="home-user-outer mb-15 bg-secondary border rounded">
-    <div class="home-subtitle text-white">機能一覧(社員)</div>
-    <div class="home-user row row-cols-2 row-cols-md-4 g-4">
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
+  <% if !admin_signed_in? %>
+    <section class="home-user-outer mt-30 border rounded bg-dark bg-gradient">
+      <div class="home-subtitle text-white">機能一覧(社員)</div>
+      <div class="home-user row row-cols-2 row-cols-md-4 g-4">
+        <div class="col mb-15">
+          <div class="card">
+            <%= image_tag "user_work.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to works_path do %>
+                <button class="btn btn-primary font-md width-100">勤怠登録</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card darken">
+            <%= image_tag "no_image.png", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to root_path do %>
+                <button class="btn btn-primary font-md width-100">機能(将来用)</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card darken">
+            <%= image_tag "no_image.png", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to root_path do %>
+                <button class="btn btn-primary font-md width-100">機能(将来用)</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card darken">
+            <%= image_tag "no_image.png", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to root_path do %>
+                <button class="btn btn-primary font-md width-100">機能(将来用)</button>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
 
-  <section class="home-admin-outer bg-info border rounded">
-    <div class="home-subtitle text-white">機能一覧(管理者)</div>
-    <div class="home-admin row row-cols-2 row-cols-md-4 g-4">
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
+  <% if !user_signed_in? %>
+    <section class="home-admin-outer mt-30 bg-info border rounded">
+      <div class="home-subtitle text-white">機能一覧(管理者)</div>
+      <div class="home-admin row row-cols-2 row-cols-md-4 g-4">
+        <div class="col mb-15">
+          <div class="card">
+            <%= image_tag "user_list.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to users_path do %>
+                <button class="btn btn-primary font-md width-100">社員一覧</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card">
+            <%= image_tag "admin_list.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to admin_users_path do %>
+                <button class="btn btn-primary font-md width-100">管理者一覧</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card">
+            <%= image_tag "admin_work_read.png", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to users_path do %>
+                <button class="btn btn-primary font-md width-100">社員勤怠一覧<br>(社員一覧)</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-15">
+          <div class="card">
+            <%= image_tag "admin_work_edit.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
+            <div class="card-body">
+              <%= link_to users_path do %>
+                <button class="btn btn-primary font-md width-100">社員勤怠編集<br>(社員一覧)</button>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-15">
-        <div class="card">
-          <%= image_tag "diary-614149_640.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
-          <div class="card-body">
-            <%= link_to root_path do %>
-              <button class="btn btn-primary" style="width: 100%;">勤怠一覧</button>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
 </div>
