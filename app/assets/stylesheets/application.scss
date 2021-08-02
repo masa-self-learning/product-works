@@ -27,6 +27,22 @@ body {
   margin-bottom: 20px;
 }
 
+// ヘッダーロゴ
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    &__img {
+      width: 2.0em;
+    }
+    &__title {
+      font-family: 'Staatliches', cursive, sans-serif;
+      font-size: 1.3em;
+      margin-left: 0.2em;
+    }
+}
+
 // ログイン用フォームｓ
 .form-login {
     width: 100%;
