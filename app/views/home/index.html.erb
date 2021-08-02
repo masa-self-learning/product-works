@@ -2,7 +2,12 @@
   <% if !admin_signed_in? && !user_signed_in? %>
     <div class="home-default-outer mt-30 bg-white border rounded">
       <div class="home-subtitle">共通</div>
-      <div class="home-default row row-cols-md-4 g-4 mb-15">
+      <div class="home-default row row-margin-none row-cols-md-4 g-4 mb-15">
+        <div class="col">
+          <%= link_to new_user_registration_path do %>
+            <button type="button" class="btn btn-primary font-md">新規登録(社員)</button>
+          <% end %>
+        </div>
         <div class="col">
           <%= link_to user_session_path do %>
             <button type="button" class="btn btn-primary  font-md">ログイン(社員)</button>
@@ -13,11 +18,6 @@
             <button type="button" class="btn btn-primary font-md">ログイン(管理者)</button>
           <% end %>
         </div>
-        <div class="col">
-          <%= link_to new_user_registration_path do %>
-            <button type="button" class="btn btn-primary font-md">新規登録(社員)</button>
-          <% end %>
-        </div>
       </div>
     </div>
   <% end %>
@@ -25,7 +25,7 @@
   <% if !admin_signed_in? %>
     <section class="home-user-outer mt-30 border rounded bg-dark bg-gradient">
       <div class="home-subtitle text-white">機能一覧(社員)</div>
-      <div class="home-user row row-cols-2 row-cols-md-4 g-4">
+      <div class="home-user row row-margin-none row-cols-2 row-cols-md-4 g-4">
         <div class="col mb-15">
           <div class="card">
             <%= image_tag "user_work.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>
@@ -73,7 +73,7 @@
   <% if !user_signed_in? %>
     <section class="home-admin-outer mt-30 bg-info border rounded">
       <div class="home-subtitle text-white">機能一覧(管理者)</div>
-      <div class="home-admin row row-cols-2 row-cols-md-4 g-4">
+      <div class="home-admin row row-margin-none row-cols-2 row-cols-md-4 g-4">
         <div class="col mb-15">
           <div class="card">
             <%= image_tag "user_list.jpg", class: "card-img-top", style: "height: 170.5px; object-fit: cover; object-position: center;" %>

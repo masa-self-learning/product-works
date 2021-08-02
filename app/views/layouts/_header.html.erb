@@ -17,18 +17,11 @@
           </div>
         <% end %>
       </li>
-      <li class="nav-item">
-        <%= link_to new_user_registration_path, class: "nav-link" do %>
-          <div class="ham-menu__link-inner">
-            <div class="ham-menu__title">新規登録(社員)</div>
-          </div>
-        <% end %>
-      </li>
       <% if !admin_signed_in? && !user_signed_in? %>
         <li class="nav-item">
-          <%= link_to admin_session_path, class: "nav-link" do %>
+          <%= link_to new_user_registration_path, class: "nav-link" do %>
             <div class="ham-menu__link-inner">
-              <div class="ham-menu__title">ログイン(管理者)</div>
+              <div class="ham-menu__title">新規登録(社員)</div>
             </div>
           <% end %>
         </li>
@@ -36,6 +29,13 @@
           <%= link_to user_session_path, class: "nav-link" do %>
             <div class="ham-menu__link-inner">
               <div class="ham-menu__title">ログイン(社員)</div>
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_session_path, class: "nav-link" do %>
+            <div class="ham-menu__link-inner">
+              <div class="ham-menu__title">ログイン(管理者)</div>
             </div>
           <% end %>
         </li>

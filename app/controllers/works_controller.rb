@@ -31,7 +31,9 @@ class WorksController < ApplicationController
       @modal_comment = @work.comment
 
       # モーダルの自動表示判定
-      @modal_view_flg = false if @modal_start_time && @modal_end_time
+      @modal_view_flg = false if @modal_start_time
+      #出勤未打刻アラート
+      @alert_msg = "出勤打刻を押してください" if !@modal_start_time
     else
       @work = Work.new
       @modal_start_time = ""

@@ -3,16 +3,19 @@
 <h1 class="main-title">Web日報登録</h1>
 <div class= "border rounded bg-white form-time-table">
   <h2 class="h3 my-3">月間データ（<%= @user.name %>）</h2>
-  <form>
-    <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
-      <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
-      <% for i in 1..12 %>
-        <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>>
-          <%= @today.ago(i.month).strftime('%Y/%m') %>
-        </option>
-      <% end %>
-    </select>
-  </form>
+  <div class="form-btn-inner">
+    <form>
+      <select class="form-control rounded-pill mb-3" name="date" onchange="submit(this.form)">
+        <option value="<% @today.strftime('%Y-%m') %>"><%= @today.strftime('%Y/%m') %></option>
+        <% for i in 1..12 %>
+          <option value="<%= @today.ago(i.month).strftime('%Y-%m') %>"<%= "selected" if @yyyymm == @today.ago(i.month).strftime('%Y-%m') %>>
+            <%= @today.ago(i.month).strftime('%Y/%m') %>
+          </option>
+        <% end %>
+      </select>
+    </form>
+    <button id="inputModal-btn" class="btn btn-primary rounded-pill font-md">当日勤怠表示</button>
+  </div>
   <table class="table table-bordered">
     <thead>
       <tr class="bg-light">
@@ -78,6 +81,7 @@
       </div>
       <div class="modal-body">
         <div class="container">
+          <div class="text-white bg-danger"><%= @alert_msg %></div>
           <div class="alert alert-primary" role="alert">
             <span id="modal_day"><%= @today.strftime('%Y年%m月%d日') %>(<%= %w(日 月 火 水 木 金 土)[@today.wday] %>)</span>
             <%= f.hidden_field :date, value: @today %>
@@ -180,6 +184,12 @@
     const inputModal = new bootstrap.Modal(document.getElementById('inputModal'));
     inputModal.toggle()
   }
+
+// 当日勤怠モーダル表示
+  $('#inputModal-btn').click(function () {
+    const inputModal = new bootstrap.Modal(document.getElementById('inputModal'));
+    inputModal.toggle()
+  })
 
   // 出勤打刻
   $('#start_btn').click(function () {

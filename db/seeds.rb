@@ -1,6 +1,6 @@
 name = "管理者"
 email =  "kanri@example.com"
-user_no = 0000
+user_no = "0000"
 password = "123456"
 Admin.create!(name: name,
              email: email,
@@ -11,7 +11,7 @@ Admin.create!(name: name,
  9.times do |n|
   name = "太郎#{n+1}"
   email =  "taro#{n+1}@example.com"
-  user_no = 111 + n
+  user_no = "111#{n}"
   password = "123456"
   User.create!(name: name,
                email: email,

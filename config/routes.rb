@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   resources :users, only: [:index, :edit, :update, :destroy]
-  resources :works, only: [:index, :edit]
+  resources :works
   resources :admin_users, only: [:index]
-  resources :admin_works, only: [:index, :edit]
+  resources :admin_works
 
 end

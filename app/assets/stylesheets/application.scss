@@ -93,6 +93,11 @@ body {
     padding: 15px;
 }
 
+.form-btn-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
 // エラーメッセージ
 #error_explanation {
     color: red;
@@ -130,7 +135,7 @@ body {
     margin-bottom: 15px;
 }
 
-.row {
+.row-margin-none {
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
