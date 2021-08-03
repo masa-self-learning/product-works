@@ -40,6 +40,9 @@ class WorksController < ApplicationController
       @modal_end_time = ""
       @modal_break_time = "01:00"
       @modal_comment = ""
+
+      #出勤未打刻アラート
+      @alert_msg = "出勤打刻を押してください"
     end
   end
 
