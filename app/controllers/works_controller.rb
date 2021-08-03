@@ -24,7 +24,7 @@ class WorksController < ApplicationController
     @modal_view_flg = true
 
     # 当日データの有無の確認
-    if @work = Work.find_by(date: "#{@today.to_date}")
+    if @work = @user.works.find_by(date: "#{@today.to_date}")
       @modal_start_time = @work.start_time.strftime('%H:%M') if @work.start_time != nil
       @modal_end_time = @work.end_time.strftime('%H:%M') if @work.end_time != nil
       @modal_break_time = @work.break_time
