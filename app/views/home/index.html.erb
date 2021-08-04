@@ -1,6 +1,6 @@
 <div class="container">
   <% if !admin_signed_in? && !user_signed_in? %>
-    <div class="home-default-outer mt-30 bg-white border rounded">
+    <div class="home-default-outer mt-15 bg-white border rounded">
       <div class="home-subtitle">共通</div>
       <div class="home-default row row-margin-none row-cols-md-4 g-4 mb-15">
         <div class="col">
@@ -23,7 +23,7 @@
   <% end %>
 
   <% if !admin_signed_in? %>
-    <section class="home-user-outer mt-30 border rounded bg-dark bg-gradient">
+    <section class="home-user-outer mt-15 border rounded bg-dark bg-gradient">
       <div class="home-subtitle text-white">機能一覧(社員)</div>
       <div class="home-user row row-margin-none row-cols-2 row-cols-md-4 g-4">
         <div class="col mb-15">
@@ -71,7 +71,7 @@
   <% end %>
 
   <% if !user_signed_in? %>
-    <section class="home-admin-outer mt-30 bg-info border rounded">
+    <section class="home-admin-outer mt-15 bg-info border rounded">
       <div class="home-subtitle text-white">機能一覧(管理者)</div>
       <div class="home-admin row row-margin-none row-cols-2 row-cols-md-4 g-4">
         <div class="col mb-15">
