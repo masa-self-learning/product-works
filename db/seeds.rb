@@ -31,8 +31,8 @@ User.create!(name: name,
 end
 
 61.times do |n|
-  from = Date.parse("2021/06/01")
-  to = Date.parse("2021/07/31")
+  from = Date.parse("2021/09/01")
+  to = Date.parse("2021/10/04")
   term = Array(from..to)
   date = term[n]
   start_time = "09:00"
