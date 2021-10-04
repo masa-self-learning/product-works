@@ -28,7 +28,9 @@
 
 ##### 社員一覧
 ![works_index](https://user-images.githubusercontent.com/78526536/129918238-0d3739b5-adec-4bbd-ac1d-2eb3b6c3e307.png)
-## URL
+## GitHub_URL
+https://github.com/masa-self-learning/product-works
+## APP_URL
 https://product-works.herokuapp.com/
 
  - 社員ログイン
