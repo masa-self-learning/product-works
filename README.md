@@ -34,8 +34,9 @@ https://github.com/masa-self-learning/product-works
 https://product-works.herokuapp.com/
 
  - 社員ログイン
-    - 1111 &ensp;&ensp; (社員番号)
+    - 1111 ~ 1119  (社員番号)　※ゲストユーザー9名分
     - 123456 (パスワード)
+
 - 管理者ログイン
   - 0000&ensp;&ensp;(社員番号)
   - 123456 (パスワード)
